@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
-  styleUrls: ['./formulario.component.css'] 
+  styleUrls: ['./formulario.component.css']
 })
 
 export class FormularioComponent implements OnInit {
@@ -28,16 +28,35 @@ export class FormularioComponent implements OnInit {
   }
 
   submitForm() {
+
+ // Array para almacenar los campos faltantes
+ let camposFaltantes: string[] = [];
+
+ // Verificar cada campo del formulario
+ Object.keys(this.form.controls).forEach(key => {
+   const control = this.form.get(key);
+   if (control && control.invalid) { // Verificar si control no es nulo
+     camposFaltantes.push(key);
+   }
+ });
+ 
+ // Mostrar alerta para cada campo faltante
+ camposFaltantes.forEach(campo => {
+   alert(`El campo ${campo} es requerido.`);
+ });
+ 
+
     this.formSubmitted = true;
     if (this.form.valid) {
       console.log('Formulario enviado correctamente');
       console.log('Datos del formulario:', this.form.value);
-      this.msgs = [{severity:'success', summary:'Éxito', detail:'Datos guardados correctamente.'}];
+      this.msgs = [{ severity: 'success', summary: 'Éxito', detail: 'Datos guardados correctamente.' }];
       this.form.reset();
       this.formSubmitted = false;
     } else {
       console.log('Por favor, completa todos los campos correctamente');
-      this.msgs = [{severity:'error', summary:'Error', detail:'Por favor, completa todos los campos correctamente.'}];
+      this.msgs = [{ severity: 'error', summary: 'Error', detail: 'Por favor, completa todos los campos correctamente.' }];
     }
+
   }
 }
