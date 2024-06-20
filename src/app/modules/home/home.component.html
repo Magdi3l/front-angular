@@ -1,0 +1,38 @@
+
+
+<table class="user-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td *ngIf="user.id !== undefined">
+        <button (click)="deleteUser(user.id)">Eliminar</button>
+        <button (click)="editUser(user)">Editar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="selectedUser" class="profile-container">
+  <div class="profile-header">
+    <h1>Editar Usuario: {{ selectedUser.id }}</h1>
+  </div>
+  <form (ngSubmit)="updateUsuario()">
+    <div class="profile-details">
+      <label for="name"><strong>Nombre:</strong></label>
+      <input type="text" id="name" [(ngModel)]="selectedUser.name" name="name" required>
+      <label for="email"><strong>Email:</strong></label>
+      <input type="email" id="email" [(ngModel)]="selectedUser.email" name="email" required>
+    </div>
+    <button type="submit">Guardar Cambios</button>
+  </form>
+</div>

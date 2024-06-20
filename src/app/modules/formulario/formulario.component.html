@@ -1,0 +1,57 @@
+<style>
+  .container {
+    margin-top: 50px;
+  }
+
+  .p-col-8 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .p-field {
+    margin-bottom: 20px;
+  }
+
+  .p-text-center {
+    text-align: center;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+</style>
+
+<div class="container">
+  <h2 class="p-text-center">Registro</h2>
+  <div class="p-grid p-justify-center">
+    <div class="p-col-8" [formGroup]="form">
+      <div class="p-field">
+        <label for="name">Nombre</label>
+        <input id="name" type="text" pInputText formControlName="name" required>
+      </div>
+      <div class="p-field">
+        <label for="email">Correo</label>
+        <input id="email" type="email" pInputText formControlName="email" required>
+      </div>
+      <div class="p-field p-text-center">
+        <button pButton type="button" (click)="submitForm()" label="Enviar"></button>
+      </div>
+    </div>
+  </div>
+  <p-messages [(value)]="msgs"></p-messages>
+
+  <div class="recent-data-container" *ngIf="usuarioRegistrado">
+    <h2>Datos Ingresados Recientemente</h2>
+    <label for="id">Nro: {{usuarioRegistrado.id}} </label>
+    <br>
+    <label for="name">Nombre: {{usuarioRegistrado.name}} </label>
+    <br>
+    <label for="email">Correo: {{usuarioRegistrado.email}} </label>
+  </div>
+</div>
+<br>
+<br>
+<br>

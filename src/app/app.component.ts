@@ -7,9 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    ngOnInit() {
-  }
-
+  title = 'Proyecto';
   form: FormGroup;
   formSubmitted: boolean = false;
   msgs: any[] = [];
@@ -26,12 +24,15 @@ export class AppComponent implements OnInit {
     });
   }
 
+  ngOnInit() {
+  }
+
   submitForm() {
     this.formSubmitted = true;
     if (this.form.valid && this.form.value.contrasena === '12345') {
       console.log('Formulario enviado correctamente');
       console.log('Datos del formulario:', this.form.value);
-      this.msgs = [{severity:'success', summary:'Éeeexito', detail:'Datos guardados correctamente.'}];
+      this.msgs = [{severity:'success', summary:'Éxito', detail:'Datos guardados correctamente.'}];
       this.form.reset();
       this.formSubmitted = false;
     } else {
